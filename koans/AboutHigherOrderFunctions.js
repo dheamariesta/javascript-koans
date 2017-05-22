@@ -5,32 +5,39 @@ var _; //globals
       that you would expect in Prototype.js (or Ruby), but without extending any of the built-in JavaScript objects.
       It's the tie to go along with jQuery's tux."
  */
+
+ //EVERYTHING IN HERE IS USING UNDERSCORE.JS
+ //http://underscorejs.org
 describe("About Higher Order Functions", function () {
 
   it("should use filter to return array items that meet a criteria", function () {
     var numbers = [1,2,3];
     var odd = _(numbers).filter(function (x) { return x % 2 !== 0 });
 
-    expect(odd).toEqual(FILL_ME_IN);
-    expect(odd.length).toBe(FILL_ME_IN);
-    expect(numbers.length).toBe(FILL_ME_IN);
+    expect(odd).toEqual([1,3]);
+    expect(odd.length).toBe(2);
+    expect(numbers.length).toBe(3);
   });
 
   it("should use 'map' to transform each element", function () {
     var numbers = [1, 2, 3];
     var numbersPlus1 = _(numbers).map(function(x) { return x + 1 });
+    //to add each of the value inside numbers to number+1, without changing the value inside the original array
 
-    expect(numbersPlus1).toEqual(FILL_ME_IN);
-    expect(numbers).toEqual(FILL_ME_IN);
+    expect(numbersPlus1).toEqual([2,3,4]);
+    expect(numbers).toEqual([1,2,3]);
   });
 
   it("should use 'reduce' to update the same result on each iteration", function () {
     var numbers = [1, 2, 3];
     var reduction = _(numbers).reduce(
             function(/* result from last call */ memo, /* current */ x) { return memo + x }, /* initial */ 0);
-
-    expect(reduction).toBe(FILL_ME_IN);
-    expect(numbers).toEqual(FILL_ME_IN);
+            //first call: memo = 0 --> cos no call previously, x = 1 --> memo = 1
+            //second call: memo = 1, x = 2 --> memo = 3
+            //etc
+            //return memo
+    expect(reduction).toBe(6);
+    expect(numbers).toEqual([1,2,3]);
   });
 
   it("should use 'forEach' for simple iteration", function () {
@@ -42,8 +49,8 @@ describe("About Higher Order Functions", function () {
 
     _(numbers).forEach(isEven);
 
-    expect(msg).toEqual(FILL_ME_IN);
-    expect(numbers).toEqual(FILL_ME_IN);
+    expect(msg).toEqual("falsetruefalse");
+    expect(numbers).toEqual([1,2,3]);
   });
 
   it("should use 'all' to test whether all items pass condition", function () {
@@ -52,8 +59,8 @@ describe("About Higher Order Functions", function () {
 
     var isEven = function(x) { return x % 2 === 0 };
 
-    expect(_(onlyEven).all(isEven)).toBe(FILL_ME_IN);
-    expect(_(mixedBag).all(isEven)).toBe(FILL_ME_IN);
+    expect(_(onlyEven).all(isEven)).toBe(true);
+    expect(_(mixedBag).all(isEven)).toBe(false);
   });
 
   it("should use 'any' to test if any items passes condition" , function () {
@@ -62,14 +69,18 @@ describe("About Higher Order Functions", function () {
 
     var isEven = function(x) { return x % 2 === 0 };
 
-    expect(_(onlyEven).any(isEven)).toBe(FILL_ME_IN);
-    expect(_(mixedBag).any(isEven)).toBe(FILL_ME_IN);
+    expect(_(onlyEven).any(isEven)).toBe(true);
+    expect(_(mixedBag).any(isEven)).toBe(true);
   });
 
   it("should use range to generate an array", function() {
-      expect(_.range(3)).toEqual(FILL_ME_IN);
-      expect(_.range(1, 4)).toEqual(FILL_ME_IN);
-      expect(_.range(0, -4, -1)).toEqual(FILL_ME_IN);
+    //_.range([start], stop, [step])
+    //Returns a list of integers from start (inclusive) to stop (exclusive), incremented (or decremented) by step
+    //default step = 1
+    //default start = 0
+      expect(_.range(3)).toEqual([0,1,2]);
+      expect(_.range(1, 4)).toEqual([1,2,3]; //from 1 (inclusive) to 4 (exclusive)
+      expect(_.range(0, -4, -1)).toEqual([0,-1,-2,-3]);
   });
 
   it("should use flatten to make nested arrays easy to work with", function() {
@@ -87,4 +98,3 @@ describe("About Higher Order Functions", function () {
   });
 
 });
-
